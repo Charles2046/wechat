@@ -1,36 +1,36 @@
 <?php
 /**
- * ÅÐ¶Ïµ±Ç°·ÃÎÊµÄÓÃ»§ÊÇ  PC¶Ë  »¹ÊÇ ÊÖ»ú¶Ë  ·µ»Øtrue ÎªÊÖ»ú¶Ë  false ÎªPC ¶Ë
+ * åˆ¤æ–­å½“å‰è®¿é—®çš„ç”¨æˆ·æ˜¯  PCç«¯  è¿˜æ˜¯ æ‰‹æœºç«¯  è¿”å›žtrue ä¸ºæ‰‹æœºç«¯  false ä¸ºPC ç«¯
  * @return boolean
-¡¡¡¡* ÊÇ·ñÒÆ¶¯¶Ë·ÃÎÊ·ÃÎÊ
-¡¡¡¡*
-¡¡¡¡* @return bool
-¡¡¡¡*/
+ã€€ã€€* æ˜¯å¦ç§»åŠ¨ç«¯è®¿é—®è®¿é—®
+ã€€ã€€*
+ã€€ã€€* @return bool
+ã€€ã€€*/
 function isMobile()
 {
-        // Èç¹ûÓÐHTTP_X_WAP_PROFILEÔòÒ»¶¨ÊÇÒÆ¶¯Éè±¸
+        // å¦‚æžœæœ‰HTTP_X_WAP_PROFILEåˆ™ä¸€å®šæ˜¯ç§»åŠ¨è®¾å¤‡
     if (isset ($_SERVER['HTTP_X_WAP_PROFILE']))
     return true;
 
-    // Èç¹ûviaÐÅÏ¢º¬ÓÐwapÔòÒ»¶¨ÊÇÒÆ¶¯Éè±¸,²¿·Ö·þÎñÉÌ»áÆÁ±Î¸ÃÐÅÏ¢
+    // å¦‚æžœviaä¿¡æ¯å«æœ‰wapåˆ™ä¸€å®šæ˜¯ç§»åŠ¨è®¾å¤‡,éƒ¨åˆ†æœåŠ¡å•†ä¼šå±è”½è¯¥ä¿¡æ¯
     if (isset ($_SERVER['HTTP_VIA']))
     {
-    // ÕÒ²»µ½Îªflase,·ñÔòÎªtrue
+    // æ‰¾ä¸åˆ°ä¸ºflase,å¦åˆ™ä¸ºtrue
     return stristr($_SERVER['HTTP_VIA'], "wap") ? true : false;
     }
-    // ÄÔ²Ð·¨£¬ÅÐ¶ÏÊÖ»ú·¢ËÍµÄ¿Í»§¶Ë±êÖ¾,¼æÈÝÐÔÓÐ´ýÌá¸ß
+    // è„‘æ®‹æ³•ï¼Œåˆ¤æ–­æ‰‹æœºå‘é€çš„å®¢æˆ·ç«¯æ ‡å¿—,å…¼å®¹æ€§æœ‰å¾…æé«˜
     if (isset ($_SERVER['HTTP_USER_AGENT']))
     {
         $clientkeywords = array ('nokia','sony','ericsson','mot','samsung','htc','sgh','lg','sharp','sie-','philips','panasonic','alcatel','lenovo','iphone','ipod','blackberry','meizu','android','netfront','symbian','ucweb','windowsce','palm','operamini','operamobi','openwave','nexusone','cldc','midp','wap','mobile');
-        // ´ÓHTTP_USER_AGENTÖÐ²éÕÒÊÖ»úä¯ÀÀÆ÷µÄ¹Ø¼ü×Ö
+        // ä»ŽHTTP_USER_AGENTä¸­æŸ¥æ‰¾æ‰‹æœºæµè§ˆå™¨çš„å…³é”®å­—
         if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT'])))
             return true;
     }
-        // Ð­Òé·¨£¬ÒòÎªÓÐ¿ÉÄÜ²»×¼È·£¬·Åµ½×îºóÅÐ¶Ï
+        // åè®®æ³•ï¼Œå› ä¸ºæœ‰å¯èƒ½ä¸å‡†ç¡®ï¼Œæ”¾åˆ°æœ€åŽåˆ¤æ–­
     if (isset ($_SERVER['HTTP_ACCEPT']))
     {
-    // Èç¹ûÖ»Ö§³Öwml²¢ÇÒ²»Ö§³ÖhtmlÄÇÒ»¶¨ÊÇÒÆ¶¯Éè±¸
-    // Èç¹ûÖ§³ÖwmlºÍhtmlµ«ÊÇwmlÔÚhtmlÖ®Ç°ÔòÊÇÒÆ¶¯Éè±¸
+    // å¦‚æžœåªæ”¯æŒwmlå¹¶ä¸”ä¸æ”¯æŒhtmlé‚£ä¸€å®šæ˜¯ç§»åŠ¨è®¾å¤‡
+    // å¦‚æžœæ”¯æŒwmlå’Œhtmlä½†æ˜¯wmlåœ¨htmlä¹‹å‰åˆ™æ˜¯ç§»åŠ¨è®¾å¤‡
         if ((strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') !== false) && (strpos($_SERVER['HTTP_ACCEPT'], 'text/html') === false || (strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') < strpos($_SERVER['HTTP_ACCEPT'], 'text/html'))))
         {
             return true;
