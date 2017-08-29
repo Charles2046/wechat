@@ -52,6 +52,25 @@ class Controller
         $this->view    = View::instance(Config::get('template'), Config::get('view_replace_str'));
         $this->request = $request;
 
+		/*
+		 * add in 2017-8-29
+		 */
+        $this->request->isAjax() ? define('IS_AJAX',true) : define('IS_AJAX',false);
+        ($this->request->method() == 'GET') ? define('IS_GET',true) : define('IS_GET',false);
+        ($this->request->method() == 'POST') ? define('IS_POST',true) : define('IS_POST',false);
+        
+        define('MODULE_NAME',$this->request->module());
+        define('CONTROLLER_NAME',$this->request->controller());
+        define('ACTION_NAME',$this->request->action());
+        define('PREFIX',C('database.prefix'));
+        $this->assign('action',ACTION_NAME);
+        $this->assign('template_now_time', time());
+        if (true == isMobile() && strtolower(MODULE_NAME) == 'home' && strtolower(CONTROLLER_NAME) == 'index' && strtolower(ACTION_NAME) == 'index'){
+        	header("Location: " . U('Mobile/Index/index'));
+        	exit();
+        }
+        read_html_cache();
+        
         // 控制器初始化
         $this->_initialize();
 
@@ -108,7 +127,10 @@ class Controller
      */
     protected function fetch($template = '', $vars = [], $replace = [], $config = [])
     {
-        return $this->view->fetch($template, $vars, $replace, $config);
+        //return $this->view->fetch($template, $vars, $replace, $config);
+    	$html = $this->view->fetch($template, $vars, $replace, $config);
+    	write_html_cache($html);
+    	return $html;
     }
 
     /**

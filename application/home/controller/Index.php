@@ -1,8 +1,12 @@
 <?php
 namespace app\home\controller;
-
 use think\Controller;
+use think\Url;
 use think\Config;
+use think\Page;
+use think\Verify;
+use think\Image;
+use think\Db;
 
 class Index extends Base
 {
@@ -11,7 +15,7 @@ class Index extends Base
 	{
 		if (isMobile() == true) {
 			header("Location: " . U('Mobile/Index/index'));
-			exit();
+			exit;
 		}
 		
 		return $this->fetch();
