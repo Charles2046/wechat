@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.5.40)
-# Date: 2017-08-28 11:58:43
+# Date: 2017-08-31 18:12:53
 # Generator: MySQL-Front 6.0  (Build 1.57)
 
 
@@ -9,11 +9,11 @@
 
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) DEFAULT NULL,
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT '@' COMMENT '邮箱',
   `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`admin_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 #
@@ -23,6 +23,27 @@ CREATE TABLE `admin` (
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` VALUES (1,'admin','admin@littleweb','202cb962ac59075b964b07152d234b70');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+
+#
+# Structure for table "admin_role"
+#
+
+DROP TABLE IF EXISTS `admin_role`;
+CREATE TABLE `admin_role` (
+  `role_id` smallint(6) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色ID',
+  `role_name` varchar(30) DEFAULT NULL COMMENT '角色名称',
+  `act_list` text COMMENT '权限列表',
+  `role_desc` varchar(255) DEFAULT NULL COMMENT '角色描述',
+  PRIMARY KEY (`role_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "admin_role"
+#
+
+/*!40000 ALTER TABLE `admin_role` DISABLE KEYS */;
+INSERT INTO `admin_role` VALUES (1,'超级管理员','all','管理全站'),(2,'编辑','3,4,22,23,48,52,31,45,49,61,14,18,19,20,21,50,24,25,26,41,53,27,28,29,30,32,33,34,35,46,47','违法接口'),(4,'客服','','客服处理订单发货'),(5,'仓管员','','仓管员'),(6,'仓管员','11,12,13,14','仓管员');
+/*!40000 ALTER TABLE `admin_role` ENABLE KEYS */;
 
 #
 # Structure for table "e_class"
