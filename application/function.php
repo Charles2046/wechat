@@ -64,7 +64,7 @@ function array_multi2single($array)
 			$result_array[] = $value;
 		}
 	}
-	return $result_array;k
+	return $result_array;
 }
 
 function friend_date($time)
