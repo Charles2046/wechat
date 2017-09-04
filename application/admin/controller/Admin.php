@@ -57,16 +57,18 @@ class Admin extends Base
 			if (! $verify->check(I('post.verify'), "admin_login")) {
 				exit(json_encode(array(
 					'status' => 0,
-					'msg' => '验证码错误'
-				)));
+					'msg' => '验证码错误',
+				), JSON_UNESCAPED_UNICODE));
 			}
 			$condition['user_name'] = I('post.username/s');
 			$condition['password'] = I('post.password/s');
-			if (! empty($condition['user_name']) && ! empty($condition['password'])) {
+			if (!empty($condition['user_name']) && !empty($condition['password'])) {
 				$condition['password'] = encrypt($condition['password']);
+				echo encrypt($condition['password']);
 				$admin_info = M('admin')->join(PREFIX . 'admin_role', PREFIX . 'admin.role_id=' . PREFIX . 'admin_role.role_id', 'INNER')
 					->where($condition)
 					->find();
+				var_dump($admin_info);
 				if (is_array($admin_info)) {
 					session('admin_id', $admin_info['admin_id']);
 					session('act_list', $admin_info['act_list']);
@@ -85,14 +87,14 @@ class Admin extends Base
 				} else {
 					exit(json_encode(array(
 						'status' => 0,
-						'msg' => '账号密码不正确'
-					)));
+						'msg' => '账号密码不正确',
+					), JSON_UNESCAPED_UNICODE));
 				}
 			} else {
 				exit(json_encode(array(
 					'status' => 0,
-					'msg' => '请填写账号密码'
-				)));
+					'msg' => '请填写账号密码',
+				), JSON_UNESCAPED_UNICODE));
 			}
 		}
 		return $this->fetch();

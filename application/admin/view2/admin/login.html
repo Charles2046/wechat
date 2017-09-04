@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Login</title>
-<link rel="stylesheet"
-	href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/login.css">
 <!--[if lte IE 8]>
 	<script type="Text/Javascript" language="JavaScript">
 	    function detectBrowser()
@@ -29,95 +29,106 @@
 </head>
 
 <body>
-	<div class="container" style="margin-top: 260px;">
-		<div class="row">
-			<div class="col-sm-6 col-sm-offset-3">
-				<div class="row">
-					<div class="col-sm-12">
-						<form action="" name="theForm" id="theForm" method="post"
+<div class="container" style="margin-top: 200px;">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<div class="row">
+				<div class="col-sm-12">
+					<form action="" name="theForm" id="theForm" method="post"
 							role="form">
-							<div class="form-group">
-								<h3 class="text-center">管理中心</h3>
-							</div>
-							<div class="form-group">
-								<input type=text " name="username" id="username"
+						<div class="form-group">
+							<h3 class="text-center">管理中心</h3>
+						</div>
+						<div class="form-group">
+							<input type=text " name="username" id="username"
 									class="form-control" placeholder="username" required="required" />
-							</div>
-							<div class="form-group">
-								<input type="password" name="password" id="password"
-									class="form-control" placeholder="password" required="required" />
-							</div>
-							<div class="form-group">
-								<input type="text" name="verify" id="verify"
-									class="form-control" placeholder="Verify Code"
-									required="required" /><img src="{:U('Admin/prove')}"
-									id="imgVerify" onclick="fleshVerify()" />
-							</div>
-							<div class="form-group">
-								<p>
-									<a href="{:U('Admin/forget_pwd')}" title="忘记密码" target="_blank">忘记密码?</a>
-								</p>
-							</div>
-							<div class="form-group">
-								<input type="reset" value="重 置" class="btn btn-default" />&nbsp;
-								&nbsp; &nbsp; <input type="submit" id="submit" value="登 陆"
-									class="btn btn-primary" />
-							</div>
-						</form>
-					</div>
+						</div>
+						<div class="form-group">
+							<input type="password" name="password" id="password" class="form-control" placeholder="password" required="required" />
+						</div>
+						<div class="form-group">
+							<input type="text" name="verify" id="verify" class="form-control" placeholder="Verify Code" required="required" />
+							<img src="{:U('Admin/prove')}" id="imgVerify" onclick="fleshVerify()" /> </div>
+						<div class="form-group">
+							<p> <a href="{:U('Admin/forget_pwd')}" title="忘记密码" target="_blank">忘记密码?</a> </p>
+						</div>
+						<div class="form-group">
+							<input type="reset" value="重 置" class="btn btn-default" />
+							&nbsp;
+							&nbsp; &nbsp;
+							<input type="submit" id="submit" value="登 陆" class="btn btn-primary" />
+						</div>
+					</form>
 				</div>
-
 			</div>
 		</div>
-		<div id="error"
-			style="position: absolute; left: 0px; bottom: 12px; text-align: center; width: 441px;">
-		</div>
 	</div>
-	<script src="__PUBLIC__/static/js/jquery-3.2.1.min.js"></script>
-	<script src="__PUBLIC__/static/bootstrap/js/bootstrap.min.js"></script>
-	<script>
-		$(function() {
-			$('#submit').on(
-					'click',
-					function() {
-						if ($('#username').val() != ''
-								&& $('#password').val() != '') {
-							$.ajax({
-								async : false,
-								url : '/index.php?m=Admin&c=Admin&a=login&t='
-										+ Math.random(),
-								data : {
-									'username' : $('#username').val(),
-									'password' : $('#password').val(),
-									verify : $('#verify').val()
-								},
-								type : 'post',
-								dataType : 'json',
-								success : function(res) {
-									if (res.status != 1) {
-										$('#error').html('<span>' + res.msg + '</span>');
-										fleshVerify();
-										return false;
-									} else {
-										top.location.href = res.url;
-									}
-								},
-								error : function(XMLHttpRequest, textStatus,
-										errorThrown) {
-									$('#error').html('<span>发送失败, 请刷新后重试! </span>');
-								}
-							});
-						} else {
+	<div id="error" style="position: absolute; left: 50%; bottom: 12px; text-align: center;"> </div>
+</div>
+<script src="__PUBLIC__/static/js/jquery-3.2.1.min.js"></script> 
+<script src="__PUBLIC__/static/bootstrap/js/bootstrap.min.js"></script> 
+<script>
+	$(function() {
+		$('#submit').on('click',function() {
+			var username = true;
+			var password = true;
+			var verify = true;
+
+			if ($('#username').val() == '') {
+				$('#error').html('<span class="error">用户名不能为空</span>');
+				$('#username').focus();
+				username = false;
+				return false;
+			}
+
+			if ($('#password').val() == '') {
+				$('#error').html('<span class="error">密码不能为空</span>');
+				$('#password').focus();
+				password = false;
+				return false;
+			}
+
+			if ($('#verify').val() == '') {
+				$('#error').html('<span class="error">验证码不能为空</span>');
+				$('#verify').focus();
+				verify = false;
+				return false;
+			}
+
+			if (verify && $('#username').val() != '' && $('#password').val() != '') {
+				$.ajax({
+					async : false,
+					url : '/index.php?m=Admin&c=Admin&a=login&t=' + Math.random(),
+					data : {
+						'username' : $('#username').val(),
+						'password' : $('#password').val(),
+						'verify' : $('#verify').val()
+					},
+					type : 'post',
+					dataType : 'json',
+					success : function(res) {
+						if (res.status != 1) {
+							$('#error').html('<span class="error">' + res.msg + '</span>');
+							fleshVerify();
+							username = false;
+							password = false;
 							return false;
+						} else {
+							top.location.href = res.url;
 						}
-					});
+					},
+					error : function(XMLHttpRequest,textStatus, errorThrown) {
+						$('#error').html('<span class="error">发送失败, 请刷新后重试! </span>');
+					}
+				});
+			} else {
+				return false;
+			}
 		});
-		function fleshVerify() {
-			$('#imgVerify').attr(
-					'src',
-					'/index.php?m=Admin&c=Admin&a=prove&r='
-							+ Math.floor(Math.random() * 100));
-		}
-	</script>
+	});
+	function fleshVerify() {
+		$('#imgVerify').attr('src','/index.php?m=Admin&c=Admin&a=prove&r=' + Math.floor(Math.random() * 100));
+	}
+</script>
 </body>
 </html>
