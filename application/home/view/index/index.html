@@ -2,9 +2,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Home</title>
+<meta http-equiv="X-UA-Compatible" content="IE-edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>首页</title>
+<link href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/static/css/style.css"  rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<ul class="nav nav-pills nav-justified">
+				<li class="active"><a href="/" title="Home">Home</a></li>
+				<li><a href="#" title="News">News</a></li>
+				<li><a href="#" title="Product">Product</a></li>
+				<li><a href="#" title="About Us">About Us</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<section>
+<h3>新闻中心</h3>
+<tpshop sql="select * from article_cat where parent_id = 2" key="k" item='v'>
+	
+</tpshop>
+</section>
+
+<hr />
+<a href="/index.php/Cache/Cache/index">清除缓存</a>
+<script src="__PUBLIC__/static/js/jquery-3.2.1.min.js"></script>
+<script src="__PUBLIC__/static/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

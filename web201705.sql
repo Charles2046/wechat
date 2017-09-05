@@ -1,5 +1,5 @@
 ﻿# Host: 127.0.0.1  (Version 5.5.40)
-# Date: 2017-09-04 17:50:12
+# Date: 2017-09-05 17:35:53
 # Generator: MySQL-Front 6.0  (Build 1.57)
 
 
@@ -48,6 +48,61 @@ CREATE TABLE `admin_role` (
 /*!40000 ALTER TABLE `admin_role` DISABLE KEYS */;
 INSERT INTO `admin_role` VALUES (1,'超级管理员','all','管理全站'),(2,'编辑','3,4,22,23,48,52,31,45,49,61,14,18,19,20,21,50,24,25,26,41,53,27,28,29,30,32,33,34,35,46,47','违法接口'),(4,'客服','','客服处理订单发货'),(5,'仓管员','','仓管员'),(6,'仓管员','11,12,13,14','仓管员');
 /*!40000 ALTER TABLE `admin_role` ENABLE KEYS */;
+
+#
+# Structure for table "article"
+#
+
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE `article` (
+  `article_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `cat_id` smallint(5) NOT NULL DEFAULT '0',
+  `title` varchar(150) NOT NULL DEFAULT '',
+  `content` longtext NOT NULL,
+  `author` varchar(30) NOT NULL DEFAULT '',
+  `author_email` varchar(60) NOT NULL DEFAULT '',
+  `keywords` varchar(255) NOT NULL DEFAULT '',
+  `article_type` tinyint(1) unsigned NOT NULL DEFAULT '2',
+  `is_open` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `add_time` int(10) unsigned NOT NULL DEFAULT '0',
+  `file_url` varchar(255) NOT NULL DEFAULT '',
+  `open_type` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `link` varchar(255) NOT NULL DEFAULT '',
+  `description` mediumtext,
+  `click` int(11) DEFAULT '0',
+  `publish_time` int(11) DEFAULT '0',
+  `thumb` varchar(255) DEFAULT '',
+  PRIMARY KEY (`article_id`),
+  KEY `cat_id` (`cat_id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=1412 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "article"
+#
+
+
+#
+# Structure for table "article_cat"
+#
+
+DROP TABLE IF EXISTS `article_cat`;
+CREATE TABLE `article_cat` (
+  `cat_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cat_name` varchar(20) DEFAULT NULL,
+  `cat_type` smallint(6) DEFAULT '0',
+  `parent_id` smallint(6) DEFAULT '0',
+  `show_in_nav` tinyint(1) DEFAULT '0',
+  `sort_order` smallint(6) DEFAULT '50',
+  `cat_desc` varchar(255) DEFAULT NULL,
+  `keywords` varchar(30) DEFAULT NULL,
+  `cat_alias` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`cat_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "article_cat"
+#
+
 
 #
 # Structure for table "e_class"
