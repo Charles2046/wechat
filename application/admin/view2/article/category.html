@@ -1,0 +1,45 @@
+<include file="public/layout" />
+<title>新增分类</title>
+</head><body>
+<div class="container">
+	<h1><a href="javascript:history.back();" title="返回列表">返回列表</a></h1>
+	<h3>文章分类</h3><h5>网站文章分类添加与管理</h5>
+	<form name="form1" action="{:U('Article/categoryHandle')}" method="post">
+		<table class="table table-border table-striped table-hover">
+			<tbody>
+				<tr>
+					<td><span>*</span>分类名称</td>
+					<td><input type="text" placeholder="名称" <in name="$cat_info[cat_id]" value="$article_system_id">readonly="readonly"</in> name="cat_name" value="{$cat_info.cat_name}" class="form-control" /></td>
+				</tr>
+				<tr>
+					<td>上级分类</td>
+					<td><select name="" class="form-control">
+							<option value="0">顶级分类</option>
+						</select></td>
+				</tr>
+				<tr>
+					<td>导航显示</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>排序</td>
+					<td><input type="text" name="" value="" class="form-control" /></td>
+				</tr>
+				<tr>
+					<td>搜索关键字</td>
+					<td><input type="text" name="" value="" class="form-control" /></td>
+				</tr>
+				<tr>
+					<td>搜索描述</td>
+					<td><input type="text" name="" value="" class="form-control" /></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" name="" value="" /></td>
+					<td><input type="submit" class="btn btn-primary" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+</body>
+</html>

@@ -29,7 +29,69 @@ class Article extends Base
 		$this->assign('type_arr', $type_arr);
 		$this->assign('cat_list', $cat_list);
 		return $this->fetch('categoryList');
-		
-		
+	}
+	
+	public function category()
+	{
+		$ArticleCat = new ArticleCatLogic();
+		$act = I('get.act', 'add');
+		$cat_id = I('get.cat_id/d');
+		$parent_id = I('get.parent_id/d');
+		if ($cat_id) {
+			$cat_info = D('article_cat')->where('cat_id=' . $cat_id)->find();
+			$parent_id = $cat_info['parent_id'];
+			$this->assign('cat_info', $cat_info);
+		}
+		$cats = $ArticleCat->article_cat_list(0, $parent_id, true);
+		$this->assign('act', $act);
+		$this->assign('cat_select', $cats);
+		return $this->fetch();
+	}
+	
+	public function articleList()
+	{
+		$Article = M('Article');
+	}
+	
+	public function article()
+	{
+		$ArticleCat = new ArticleCatLogic();
+	}
+	
+	private function initEditor()
+	{
+		$this->assign("URL_upload", U('Admin/Ueditor/imageUp', array('savepath'=>'article')));
+		$this->assign("URL_fileUp", U('Admin/Ueditor/fileUp', array('savepath'=>'article')));
+		$this->assign("URL_scrawlUp", U('Admin/Ueditor/scrawlUp', array('savepath'=>'article')));
+		$this->assign("URL_getRemoteImage", U('Admin/Ueditor/getRemoteImage', array('savepath'=>'article')));
+		$this->assign("URL_imageManager", U('Admin/Ueditor/imageManager', array('savepath'=>'article')));
+		$this->assign("URL_imageUp", U('Admin/Ueditor/imageUp', array('savepath'=>'article')));
+		$this->assign("URL_getMovie", U('Admin/Ueditor/getMovie', array('savepath'=>'article')));
+		$this->assign("URL_Home", "");
+	}
+	
+	public function categoryHandle()
+	{
+		$data = I('post.');
+	}
+	
+	public function articleHandle()
+	{
+		$date = I('post.');
+	}
+	
+	public function link()
+	{
+		$act = I('get.act', 'add');
+	}
+	
+	public function linkList()
+	{
+		$Ad = M('friend_link');
+	}
+	
+	public function linkHandle()
+	{
+		$data = I('post.');
 	}
 }
