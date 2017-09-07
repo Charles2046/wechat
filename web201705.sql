@@ -1,5 +1,5 @@
 ﻿# Host: 127.0.0.1  (Version 5.5.40)
-# Date: 2017-09-05 17:35:53
+# Date: 2017-09-07 18:06:50
 # Generator: MySQL-Front 6.0  (Build 1.57)
 
 
@@ -151,9 +151,12 @@ CREATE TABLE `system_menu` (
   `right` text COMMENT '权限码(控制器+动作)',
   `is_del` tinyint(1) DEFAULT '0' COMMENT '删除状态 1删除,0正常',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "system_menu"
 #
 
+/*!40000 ALTER TABLE `system_menu` DISABLE KEYS */;
+INSERT INTO `system_menu` VALUES (63,'网站设置','system','System@index,System@handle',0);
+/*!40000 ALTER TABLE `system_menu` ENABLE KEYS */;
